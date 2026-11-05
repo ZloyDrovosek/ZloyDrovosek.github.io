@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обо мне</title>
+    <style>
+        :root {
+            --text-main: #f5f3ff;
+            --text-muted: #d8b4fe;
+            --accent: #a855f7;
+            --accent-hover: #c084fc;
+            --glow: rgba(168, 85, 247, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #05020c;
+            background-image: url('0-1-1.png'); /* Твой фон */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: var(--text-main);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        /* --- СТЕНА ПЛОТНОГО ВЫСОКОГО ОГНЯ --- */
+        .fire-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 280px; /* Высокий уровень пламени */
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .flame-wrapper {
+            position: absolute;
+            bottom: 0;
+            left: -2%;
+            width: 104%;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        /* Каждый блок пламени теперь шире, перекрывает соседа и имеет острый верх */
+        .flame {
+            flex-shrink: 0;
+            width: 8.5%; /* Заполняют всю ширину */
+            height: 180px;
+            margin-left: -2.5%; /* Плотное наложение друг на друга убирает пробелы */
+            background: linear-gradient(to top, #3b0764 15%, #6b21a8 40%, #a855f7 75%, transparent 100%);
+            border-radius: 50% 50% 0% 0% / 100% 100% 0% 0%; /* Острые пики */
+            animation: burn 1.5s infinite ease-in-out alternate;
+            transform-origin: bottom center;
+            opacity: 0.85;
+        }
+
+        /* Разные высоты для хаотичного и плотного эффекта стены */
+        .flame:nth-child(2n) { height: 260px; animation-duration: 1.2s; animation-delay: 0.1s; opacity: 0.95; }
+        .flame:nth-child(3n) { height: 210px; animation-duration: 1.7s; animation-delay: 0.4s; opacity: 0.8; }
+        .flame:nth-child(4n) { height: 280px; animation-duration: 1.4s; animation-delay: 0.2s; opacity: 0.9; }
+        .flame:nth-child(5n) { height: 190px; animation-duration: 1.9s; animation-delay: 0.6s; opacity: 0.85; }
+
+        @keyframes burn {
+            0% { transform: scaleX(0.9) rotate(-1deg); }
+            100% { transform: scaleX(1.1) translateY(-25px) rotate(2deg); }
+        }
+
+        /* ЛЕВАЯ ПАНЕЛЬ С АВОЙ */
+        .corner-panel {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            z-index: 10;
+            width: 160px;
+        }
+
+        .avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-image: url('imageava.png'); /* Твоя аватарка */
+            background-size: cover;
+            background-position: center;
+            background-color: #000;
+            box-shadow: 0 0 30px var(--glow);
+            border: 3px solid var(--accent);
+        }
+
+        .nickname {
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 4px;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+            text-align: center;
+            width: 100%;
+            color: var(--text-main);
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .link-btn {
+            display: block;
+            background-color: rgba(15, 2, 22, 0.7);
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            cursor: pointer;
+        }
+
+        .link-btn:hover {
+            background: linear-gradient(90deg, #6b21a8, #a855f7);
+            border-color: #c084fc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.5);
+        }
+
+        /* ТЕКСТОВЫЙ БЛОК СПРАВА СВЕРХУ С АТОМОМ */
+        .right-top-text {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            max-width: 450px;
+            text-align: right;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .tagline {
+            color: var(--accent);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .bio {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.6;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+            margin-bottom: 30px;
+        }
+
+        /* АТОМ */
+        .atom {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin-right: 20px;
+        }
+
+        .nucleus {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 14px;
+            height: 14px;
+            background-color: var(--text-main);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px var(--text-main), 0 0 30px var(--accent);
+        }
+
+        .orbit {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 1px dashed rgba(168, 85, 247, 0.4);
+            border-radius: 50%;
+        }
+
+        .orbit::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -4px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--text-main);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--text-main), 0 0 15px var(--accent);
+        }
+
+        .orbit-1 { transform: rotateX(75deg) rotateY(15deg); animation: orbit-rotate-1 3s linear infinite; }
+        .orbit-2 { transform: rotateX(75deg) rotateY(65deg); animation: orbit-rotate-2 3.5s linear infinite; }
+        .orbit-3 { transform: rotateX(75deg) rotateY(-35deg); animation: orbit-rotate-3 4s linear infinite; }
+
+        @keyframes orbit-rotate-1 { 0% { transform: rotateX(75deg) rotateY(15deg) rotateZ(0deg); } 100% { transform: rotateX(75deg) rotateY(15deg) rotateZ(360deg); } }
+        @keyframes orbit-rotate-2 { 0% { transform: rotateX(75deg) rotateY(65deg) rotateZ(0deg); } 100% { transform: rotateX(75deg) rotateY(65deg) rotateZ(360deg); } }
+        @keyframes orbit-rotate-3 { 0% { transform: rotateX(75deg) rotateY(-35deg) rotateZ(0deg); } 100% { transform: rotateX(75deg) rotateY(-35deg) rotateZ(360deg); } }
+    </style>
+</head>
+<body>
+
+    <!-- Угловая панель слева сверху -->
+    <div class="corner-panel">
+        <div class="avatar"></div>
+        <div class="nickname">bedolaga</div>
+        <div class="links-container">
+            <a href="https://github.com/ZloyDrovosek" target="_blank" class="link-btn">GitHub</a>
+            <a href="https://steamcommunity.com/profiles/76561199231103361/" target="_blank" class="link-btn">Steam</a>
+            <a href="https://discordapp.com/users/903992249514336276" target="_blank" class="link-btn">Discord</a>
+        </div>
+    </div>
+
+    <!-- Текстовый блок справа сверху сайта с атомом -->
+    <div class="right-top-text">
+        <p class="tagline">Добро пожаловать!</p>
+        <p class="bio">
+            Вы попали на мой личный сайт-страничку. Здесь я постарался собрать всё, что могу о себе рассказать. Спасибо, что посетили моё творение!
+        </p>
+
+        <div class="atom">
+            <div class="nucleus"></div>
+            <div class="orbit orbit-1"></div>
+            <div class="orbit orbit-2"></div>
+            <div class="orbit orbit-3"></div>
+        </div>
+    </div>
+
+    <!-- ТЕПЕРЬ ОГОНЬ ТУТ ЕСТЬ И ОН ДЕЙСТВИТЕЛЬНО СВЕРХПЛОТНЫЙ -->
+    <div class="fire-container">
+        <div class="flame-wrapper">
+            <div class="flame"></div><div class="flame"></div><div class="flame"></div>
+            <div class="flame"></div><div class="flame"></div><div class="flame"></div>
+            <div class="flame"></div><div class="flame"></div><div class="flame"></div>
+            <div class="flame"></div><div class="flame"></div><div class="flame"></div>
+            <div class="flame"></div><div class="flame"></div><div class="flame"></div>
+            <div class="flame"></div><div class="flame"></div><div class="flame"></div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
