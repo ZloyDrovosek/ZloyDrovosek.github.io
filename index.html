@@ -5,12 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Обо мне</title>
     <style>
+        /* НАСТРОЙКА ЦВЕТОВ ВСЕГО САЙТА (ПРОСТО МЕНЯЙ ЗНАЧЕНИЯ ТУТ) */
         :root {
-            --text-main: #f5f3ff;
-            --text-muted: #d8b4fe;
-            --accent: #a855f7;
-            --accent-hover: #c084fc;
-            --glow: rgba(168, 85, 247, 0.4);
+            /* 1. Цвета текстов */
+            --text-main: #ffffff;          /* Цвет никнейма и кнопок */
+            --text-muted: #d1d1d6;         /* Цвет текста "Обо мне" (светло-серый для удобства чтения) */
+            --accent: #808ba8;             /* Цвет надписи "Добро пожаловать!" */
+            
+            /* 2. Обводка и свечение аватара */
+            --avatar-border: #fcfcfc;      /* Цвет рамки вокруг аватарки */
+            --avatar-glow: rgba(255, 255, 255, 0.5); /* Неоновое свечение аватарки */
+
+            /* 3. Плашки (кнопки) соцсетей в обычном состоянии */
+            --btn-bg: rgba(109, 67, 224, 0.07); /* Полупрозрачный фон кнопок */
+            --btn-border: rgba(255, 255, 255, 0.3); /* Цвет границ кнопок */
+            
+            /* 4. Плашки (кнопки) при наведении курсора */
+            --btn-hover-bg1: #fdfdfd;      /* Первая точка градиента при наведении */
+            --btn-hover-bg2: #3e3e5a;      /* Вторая точка градиента при наведении */
+            --btn-hover-border: #85a6b1;   /* Цвет рамки при наведении */
+            --btn-hover-shadow: rgba(31, 54, 189, 0.6); /* Свечение кнопки при наведении */
+
+            /* 5. Элементы атома */
+            --atom-core: #ffffff;          /* Цвет ядра атома */
+            --atom-orbit: rgba(255, 255, 255, 0.4); /* Цвет орбит атома */
+            --atom-electron: #ffffff;      /* Цвет электронов на орбитах */
         }
 
         * {
@@ -22,7 +41,7 @@
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: #05020c;
-            background-image: url('EE1BD005-F3E3-4398-8A73-ABE070DDE42D.gif'); /* Твой фон */
+            background-image: url('EE1BD005-F3E3-4398-8A73-ABE070DDE42D.gif'); /* Ваш фон */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -31,39 +50,46 @@
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
+            display: flex;
         }
 
+        /* Затемнение фона для читаемости текста */
         body::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.062);
             z-index: 0;
         }
 
-        /* ЛЕВАЯ ПАНЕЛЬ С АВОЙ */
+        /* ЛЕВАЯ ПАНЕЛЬ С АВОЙ И КНОПКАМИ */
         .corner-panel {
             position: absolute;
-            top: 30px;
-            left: 30px;
+            top: 40px;
+            left: 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             z-index: 10;
-            width: 160px;
+            width: 180px;
         }
 
         .avatar {
+            border: 3px solid var(--avatar-border);
+            box-shadow: 0 0 20px var(--avatar-glow);
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            background-image: url('imageava.png'); /* Твоя аватарка */
+            background-image: url('imageava.png'); /* Ваша аватарка */
             background-size: cover;
             background-position: center;
             background-color: #000;
-            box-shadow: 0 0 30px var(--glow);
-            border: 3px solid var(--accent);
+            transition: transform 0.3s ease;
+        }
+
+        .avatar:hover {
+            transform: scale(1.03);
         }
 
         .nickname {
@@ -87,7 +113,7 @@
 
         .link-btn {
             display: block;
-            background-color: rgba(15, 2, 22, 0.7);
+            background-color: var(--btn-bg);
             color: var(--text-main);
             text-decoration: none;
             padding: 12px;
@@ -96,36 +122,39 @@
             font-weight: 600;
             text-align: center;
             transition: all 0.25s ease;
-            border: 1px solid rgba(168, 85, 247, 0.3);
+            border: 1px solid var(--btn-border);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             cursor: pointer;
         }
 
         .link-btn:hover {
-            background: linear-gradient(90deg, #6b21a8, #a855f7);
-            border-color: #c084fc;
+            background: linear-gradient(90deg, var(--btn-hover-bg1), var(--btn-hover-bg2));
+            border-color: var(--btn-hover-border);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(168, 85, 247, 0.5);
+            box-shadow: 0 4px 15px var(--btn-hover-shadow);
         }
-                /* ТЕКСТОВЫЙ БЛОК СПРАВА СВЕРХУ С АТОМОМ */
+
+        /* ТЕКСТОВЫЙ БЛОК СПРАВА СВЕРХУ С АТОМОМ */
         .right-top-text {
             position: absolute;
             top: 40px;
             right: 40px;
-            max-width: 450px;
+            max-width: 500px;
             text-align: right;
             z-index: 10;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
+            gap: 15px;
         }
 
         .tagline {
             color: var(--accent);
             font-size: 14px;
             font-weight: 600;
-            margin-bottom: 12px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
         }
 
@@ -134,80 +163,131 @@
             font-size: 16px;
             line-height: 1.6;
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
-            margin-bottom: 30px;
         }
 
-        /* АТОМ */
+        /* КРАСИВЫЙ АНИМИРОВАННЫЙ АТОМ */
         .atom {
             position: relative;
             width: 120px;
             height: 120px;
+            margin-top: 20px;
             margin-right: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .nucleus {
-            position: absolute;
-            top: 50%;
-            left: 50%;
             width: 14px;
             height: 14px;
-            background-color: var(--text-main);
+            background-color: var(--atom-core);
             border-radius: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 15px var(--text-main), 0 0 30px var(--accent);
+            box-shadow: 0 0 12px var(--atom-core);
         }
 
         .orbit {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 1px dashed rgba(168, 85, 247, 0.4);
+            border: 1px solid var(--atom-orbit);
             border-radius: 50%;
+            width: 100%;
+            height: 40px;
         }
 
-        .orbit::before {
+        /* Добавляем электроны на орбиты через ::after */
+        .orbit::after {
             content: '';
             position: absolute;
-            top: 50%;
-            left: -4px;
-            width: 8px;
-            height: 8px;
-            background-color: var(--text-main);
+            width: 6px;
+            height: 6px;
+            background-color: var(--atom-electron);
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--text-main), 0 0 15px var(--accent);
+            top: -3px;
+            left: 50%;
+            box-shadow: 0 0 8px var(--atom-electron);
         }
 
-        .orbit-1 { transform: rotateX(75deg) rotateY(15deg); animation: orbit-rotate-1 3s linear infinite; }
-        .orbit-2 { transform: rotateX(75deg) rotateY(65deg); animation: orbit-rotate-2 3.5s linear infinite; }
-        .orbit-3 { transform: rotateX(75deg) rotateY(-35deg); animation: orbit-rotate-3 4s linear infinite; }
+        .orbit-1 {
+            transform: rotateX(75deg) rotateY(0deg);
+            animation: orbit-rotate-1 4s linear infinite;
+        }
 
-        @keyframes orbit-rotate-1 { 0% { transform: rotateX(75deg) rotateY(15deg) rotateZ(0deg); } 100% { transform: rotateX(75deg) rotateY(15deg) rotateZ(360deg); } }
-        @keyframes orbit-rotate-2 { 0% { transform: rotateX(75deg) rotateY(65deg) rotateZ(0deg); } 100% { transform: rotateX(75deg) rotateY(65deg) rotateZ(360deg); } }
-        @keyframes orbit-rotate-3 { 0% { transform: rotateX(75deg) rotateY(-35deg) rotateZ(0deg); } 100% { transform: rotateX(75deg) rotateY(-35deg) rotateZ(360deg); } }
+        .orbit-2 {
+            transform: rotateX(75deg) rotateY(60deg);
+            animation: orbit-rotate-2 4s linear infinite;
+        }
+
+        .orbit-3 {
+            transform: rotateX(75deg) rotateY(-60deg);
+            animation: orbit-rotate-3 4s linear infinite;
+        }
+
+        /* АНИМАЦИИ ВРАЩЕНИЯ ОРБИТ */
+        @keyframes orbit-rotate-1 {
+            0% { transform: rotateX(75deg) rotateY(0deg) rotateZ(0deg); }
+            100% { transform: rotateX(75deg) rotateY(0deg) rotateZ(360deg); }
+        }
+
+        @keyframes orbit-rotate-2 {
+            0% { transform: rotateX(75deg) rotateY(60deg) rotateZ(0deg); }
+            100% { transform: rotateX(75deg) rotateY(60deg) rotateZ(360deg); }
+        }
+
+        @keyframes orbit-rotate-3 {
+            0% { transform: rotateX(75deg) rotateY(-60deg) rotateZ(0deg); }
+            100% { transform: rotateX(75deg) rotateY(-60deg) rotateZ(360deg); }
+        }
+
+        /* ПОЛНОЕ ИСПРАВЛЕНИЕ ВИЗУАЛЬНЫХ БАГОВ НА МОБИЛКАХ */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                overflow-y: auto;
+                padding: 30px 15px;
+            }
+            body::before {
+                position: fixed; /* В мобильной версии подложка закреплена */
+            }
+            .corner-panel {
+                position: static;
+                width: 100%;
+                max-width: 260px;
+                margin-bottom: 30px;
+            }
+            .right-top-text {
+                position: static;
+                max-width: 100%;
+                text-align: center;
+                align-items: center;
+            }
+            .atom {
+                margin-right: 0;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Угловая панель слева сверху -->
+    <!-- Угловая панель слева сверху (на мобильных становится по центру сверху) -->
     <div class="corner-panel">
         <div class="avatar"></div>
         <div class="nickname">bedolaga</div>
         <div class="links-container">
-            <a href="https://github.com/ZloyDrovosek" target="_blank" class="link-btn">GitHub</a>
-            <a href="https://steamcommunity.com/profiles/76561199231103361/" target="_blank" class="link-btn">Steam</a>
-            <a href="https://discordapp.com/users/903992249514336276" target="_blank" class="link-btn">Discord</a>
+            <a href="https://github.com" target="_blank" class="link-btn">GitHub</a>
+            <a href="https://steamcommunity.com" target="_blank" class="link-btn">Steam</a>
+            <a href="https://discordapp.com" target="_blank" class="link-btn">Discord</a>
         </div>
     </div>
 
-    <!-- Текстовый блок справа сверху сайта с атомом -->
+    <!-- Текстовый блок справа сверху (на мобильных спускается вниз под кнопки) -->
     <div class="right-top-text">
         <p class="tagline">Добро пожаловать!</p>
         <p class="bio">
-            Вы попали на мой личный сайт-страничку. Здесь я постарался собрать всё, что могу о себе рассказать. Спасибо, что посетили моё творение! Простите, если вы открыли сайт на телефоне то будут визуальные баги позже исправлю.Спасибо за понимание❤
+            Вы попали на мой личный сайт-страничку. Здесь я постарался собрать всё, что могу о себе рассказать. Спасибо, что посетили моё творение!❤
         </p>
 
+        <!-- Анимированный атом -->
         <div class="atom">
             <div class="nucleus"></div>
             <div class="orbit orbit-1"></div>
@@ -216,20 +296,8 @@
         </div>
     </div>
 
-    <!-- ТЕПЕРЬ ОГОНЬ ТУТ ЕСТЬ И ОН ДЕЙСТВИТЕЛЬНО СВЕРХПЛОТНЫЙ -->
-    <div class="fire-container">
-        <div class="flame-wrapper">
-            <div class="flame"></div><div class="flame"></div><div class="flame"></div>
-            <div class="flame"></div><div class="flame"></div><div class="flame"></div>
-            <div class="flame"></div><div class="flame"></div><div class="flame"></div>
-            <div class="flame"></div><div class="flame"></div><div class="flame"></div>
-            <div class="flame"></div><div class="flame"></div><div class="flame"></div>
-            <div class="flame"></div><div class="flame"></div><div class="flame"></div>
-        </div>
-    </div>
-
 </body>
-</html>
+
 
 
 
