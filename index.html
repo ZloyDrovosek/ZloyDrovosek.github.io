@@ -76,12 +76,6 @@
             opacity: 0.85;
         }
 
-        /* Разные высоты для хаотичного и плотного эффекта стены */
-        .flame:nth-child(2n) { height: 260px; animation-duration: 1.2s; animation-delay: 0.1s; opacity: 0.95; }
-        .flame:nth-child(3n) { height: 210px; animation-duration: 1.7s; animation-delay: 0.4s; opacity: 0.8; }
-        .flame:nth-child(4n) { height: 280px; animation-duration: 1.4s; animation-delay: 0.2s; opacity: 0.9; }
-        .flame:nth-child(5n) { height: 190px; animation-duration: 1.9s; animation-delay: 0.6s; opacity: 0.85; }
-
         @keyframes burn {
             0% { transform: scaleX(0.9) rotate(-1deg); }
             100% { transform: scaleX(1.1) translateY(-25px) rotate(2deg); }
