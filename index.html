@@ -41,46 +41,6 @@
             z-index: 0;
         }
 
-        /* --- СТЕНА ПЛОТНОГО ВЫСОКОГО ОГНЯ --- */
-        .fire-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 280px; /* Высокий уровень пламени */
-            z-index: 1;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .flame-wrapper {
-            position: absolute;
-            bottom: 0;
-            left: -2%;
-            width: 104%;
-            height: 100%;
-            display: flex;
-            align-items: flex-end;
-        }
-
-        /* Каждый блок пламени теперь шире, перекрывает соседа и имеет острый верх */
-        .flame {
-            flex-shrink: 0;
-            width: 8.5%; /* Заполняют всю ширину */
-            height: 180px;
-            margin-left: -2.5%; /* Плотное наложение друг на друга убирает пробелы */
-            background: linear-gradient(to top, #3b0764 15%, #6b21a8 40%, #a855f7 75%, transparent 100%);
-            border-radius: 50% 50% 0% 0% / 100% 100% 0% 0%; /* Острые пики */
-            animation: burn 1.5s infinite ease-in-out alternate;
-            transform-origin: bottom center;
-            opacity: 0.85;
-        }
-
-        @keyframes burn {
-            0% { transform: scaleX(0.9) rotate(-1deg); }
-            100% { transform: scaleX(1.1) translateY(-25px) rotate(2deg); }
-        }
-
         /* ЛЕВАЯ ПАНЕЛЬ С АВОЙ */
         .corner-panel {
             position: absolute;
