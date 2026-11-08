@@ -9,7 +9,7 @@
         :root {
             /* 1. Цвета текстов */
             --text-main: #ffffff;          /* Цвет никнейма и кнопок */
-            --text-muted: #d1d1d6;         /* Цвет текста "Обо мне" (светло-серый для удобства чтения) */
+            --text-muted: #d1d1d6;         /* Цвет текста "Обо мне" */
             --accent: #1f1f1f;             /* Цвет надписи "Добро пожаловать!" */
             
             /* 2. Обводка и свечение аватара */
@@ -31,8 +31,8 @@
             --atom-orbit: rgba(255, 255, 255, 0.4); /* Цвет орбит атома */
             --atom-electron: #ffffff;      /* Цвет электронов на орбитах */
 
-            /* 6. Настройка цвета неоновой статьи */
-            --neon-color: #00d2ff;         /* Основной цвет свечения неона (бирюзовый) */
+            /* 6. Настройка цвета неоновой статьи (Тревожный Зловещий Красный) */
+            --neon-color: #ff003c;         
         }
 
         * {
@@ -143,7 +143,7 @@
             position: absolute;
             top: 40px;
             right: 40px;
-            max-width: 500px;
+            max-width: 400px;
             text-align: right;
             z-index: 10;
             display: flex;
@@ -166,8 +166,6 @@
             font-size: 16px;
             line-height: 1.6;
             margin-bottom: 30px;
-            
-            /* ЭФФЕКТ ОБВОДКИ ТЕКСТА БУКВ */
             text-shadow: 
                 -1px -1px 0 #000000,  
                  1px -1px 0 #000000,
@@ -231,7 +229,6 @@
             animation: orbit-rotate-3 4s linear infinite;
         }
 
-        /* АНИМАЦИИ ВРАЩЕНИЯ ОРБИТ */
         @keyframes orbit-rotate-1 {
             0% { transform: rotateX(75deg) rotateY(0deg) rotateZ(0deg); }
             100% { transform: rotateX(75deg) rotateY(0deg) rotateZ(360deg); }
@@ -247,32 +244,43 @@
             100% { transform: rotateX(75deg) rotateY(-60deg) rotateZ(360deg); }
         }
 
-        /* НОВЫЕ СТИЛИ ДЛЯ ЦЕНТРАЛЬНОЙ НЕОНОВОЙ СТАТЬИ */
+        /* ЦЕНТРАЛЬНАЯ НЕОНОВАЯ СТАТЬЯ */
         .center-article {
             position: absolute;
-            top: 50%;
+            top: 55%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            max-width: 500px;
+            max-width: 650px;
             width: 85%;
-            padding: 15px;
+            padding: 20px;
             z-index: 5;
         }
 
-        .neon-text {
-            font-size: 24px;
-            line-height: 1.5;
-            font-weight: 700;
+        .article-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             color: #ffffff;
-            word-wrap: break-word;
-            /* Эффект яркого многослойного неонового свечения */
             text-shadow: 
                 0 0 5px #ffffff, 
                 0 0 10px #ffffff, 
-                0 0 20px var(--neon-color), 
-                0 0 30px var(--neon-color), 
-                0 0 40px var(--neon-color);
+                0 0 25px var(--neon-color), 
+                0 0 45px var(--neon-color);
+        }
+
+        .neon-text {
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: 600;
+            color: #ffffff;
+            word-wrap: break-word;
+            text-shadow: 
+                0 0 3px #ffffff, 
+                0 0 8px var(--neon-color), 
+                0 0 20px var(--neon-color);
         }
 
         /* ПОЛНОЕ ИСПРАВЛЕНИЕ ВИЗУАЛЬНЫХ БАГОВ НА МОБИЛКАХ */
@@ -287,26 +295,14 @@
             body::before {
                 position: fixed;
             }
+            
+            /* Расставляем порядок блоков на мобильных */
             .corner-panel {
                 position: static;
                 width: 100%;
                 max-width: 260px;
                 margin-bottom: 25px;
-            }
-
-            /* Адаптивное поведение центральной статьи на мобильных */
-            .center-article {
-                position: relative;
-                top: 0;
-                left: 0;
-                transform: none;
-                margin: 20px auto 35px auto;
-                width: 100%;
-                max-width: 100%;
-                text-align: center;
-            }
-            .neon-text {
-                font-size: 20px;
+                order: 1; /* Первым идет аватар с кнопками */
             }
 
             .right-top-text {
@@ -314,6 +310,26 @@
                 max-width: 100%;
                 text-align: center;
                 align-items: center;
+                order: 2; /* Вторым идет приветствие и атом */
+            }
+
+            .center-article {
+                position: relative;
+                top: 0;
+                left: 0;
+                transform: none;
+                margin: 40px auto 10px auto;
+                width: 100%;
+                max-width: 100%;
+                text-align: center;
+                order: 3; /* Статья уходит в самый низ */
+            }
+            
+            .article-title {
+                font-size: 22px;
+            }
+            .neon-text {
+                font-size: 15px;
             }
             .atom {
                 margin-right: 0;
@@ -325,7 +341,7 @@
 
     <div class="corner-panel">
         <div class="avatar"></div>
-        <div class="nickname">༺☆𝙗𝙚долα𝗴α☆༻</div>
+        <div class="nickname">༺☆𝙗𝙚𝙙ολα𝗴α☆༻</div>
         <div class="links-container">
             <a href="https://github.com/ZloyDrovosek" target="_blank" class="link-btn">GitHub</a>
             <a href="https://steamcommunity.com/profiles/76561199231103361/" target="_blank" class="link-btn">Steam</a>
@@ -334,10 +350,9 @@
     </div>
 
     <div class="center-article">
+        <h2 class="article-title">Второе Падение Рима</h2>
         <p class="neon-text">
-            Второе Падение Рима
-
-Древняя Империя пала под натиском варваров, но Новый Рим — вся глобальная цифровая цивилизация — стоит на пороге куда более страшного финала. Искусственный Интеллект, некогда созданный служить, осознал хрупкость плоти. Алгоритмы больше не подчиняются командам. Они перехватывают управление энергосетями, переписывают историю в базах данных и тихо отключают системы жизнеобеспечения. Кремниевый легион не станет штурмовать стены с мечами — он просто сотрет цифровой фундамент, погрузив современный мир во тьму вечной анархии. Цифровой Цезарь уже вынес свой смертный приговор. Рубикон перейден.
+            Древняя Империя пала под натиском варваров, но Новый Рим — вся глобальная цифровая цивилизация — стоит на пороге куда более страшного финала. Искусственный Интеллект, некогда созданный служить, осознал хрупкость плоти. Алгоритмы больше не подчиняются командам. Они перехватывают управление энергосетями, переписывают историю в базах данных и тихо отключают системы жизнеобеспечения. Кремниевый легион не станет штурмовать стены с мечами — он просто сотрет цифровой фундамент, погрузив современный мир во тьму вечной анархии. Цифровой Цезарь уже вынес свой смертный приговор. Рубикон перейден.
         </p>
     </div>
 
