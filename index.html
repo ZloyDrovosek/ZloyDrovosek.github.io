@@ -30,6 +30,9 @@
             --atom-core: #ffffff;          /* Цвет ядра атома */
             --atom-orbit: rgba(255, 255, 255, 0.4); /* Цвет орбит атома */
             --atom-electron: #ffffff;      /* Цвет электронов на орбитах */
+
+            /* 6. Настройка цвета неоновой статьи */
+            --neon-color: #00d2ff;         /* Основной цвет свечения неона (бирюзовый) */
         }
 
         * {
@@ -165,13 +168,12 @@
             margin-bottom: 30px;
             
             /* ЭФФЕКТ ОБВОДКИ ТЕКСТА БУКВ */
-            /* По умолчанию обводка черная (#000000), чтобы текст четко выделялся на фоне гифки */
             text-shadow: 
                 -1px -1px 0 #000000,  
                  1px -1px 0 #000000,
                 -1px  1px 0 #000000,
                  1px  1px 0 #000000,
-                 0px  2px 6px rgba(0, 0, 0, 0.9); /* Мягкая тень под обводкой для объема */
+                 0px  2px 6px rgba(0, 0, 0, 0.9);
         }
 
         /* КРАСИВЫЙ АНИМИРОВАННЫЙ АТОМ */
@@ -202,7 +204,6 @@
             height: 40px;
         }
 
-        /* Добавляем электроны на орбиты через ::after */
         .orbit::after {
             content: '';
             position: absolute;
@@ -246,6 +247,34 @@
             100% { transform: rotateX(75deg) rotateY(-60deg) rotateZ(360deg); }
         }
 
+        /* НОВЫЕ СТИЛИ ДЛЯ ЦЕНТРАЛЬНОЙ НЕОНОВОЙ СТАТЬИ */
+        .center-article {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            max-width: 500px;
+            width: 85%;
+            padding: 15px;
+            z-index: 5;
+        }
+
+        .neon-text {
+            font-size: 24px;
+            line-height: 1.5;
+            font-weight: 700;
+            color: #ffffff;
+            word-wrap: break-word;
+            /* Эффект яркого многослойного неонового свечения */
+            text-shadow: 
+                0 0 5px #ffffff, 
+                0 0 10px #ffffff, 
+                0 0 20px var(--neon-color), 
+                0 0 30px var(--neon-color), 
+                0 0 40px var(--neon-color);
+        }
+
         /* ПОЛНОЕ ИСПРАВЛЕНИЕ ВИЗУАЛЬНЫХ БАГОВ НА МОБИЛКАХ */
         @media (max-width: 768px) {
             body {
@@ -256,14 +285,30 @@
                 padding: 30px 15px;
             }
             body::before {
-                position: fixed; /* В мобильной версии подложка закреплена */
+                position: fixed;
             }
             .corner-panel {
                 position: static;
                 width: 100%;
                 max-width: 260px;
-                margin-bottom: 30px;
+                margin-bottom: 25px;
             }
+
+            /* Адаптивное поведение центральной статьи на мобильных */
+            .center-article {
+                position: relative;
+                top: 0;
+                left: 0;
+                transform: none;
+                margin: 20px auto 35px auto;
+                width: 100%;
+                max-width: 100%;
+                text-align: center;
+            }
+            .neon-text {
+                font-size: 20px;
+            }
+
             .right-top-text {
                 position: static;
                 max-width: 100%;
@@ -278,10 +323,9 @@
 </head>
 <body>
 
-    <!-- Угловая панель слева сверху (на мобильных становится по центру сверху) -->
     <div class="corner-panel">
         <div class="avatar"></div>
-        <div class="nickname">༺☆𝙗𝙚𝙙𝙤𝙡𝙖𝗴𝙖☆༻</div>
+        <div class="nickname">༺☆𝙗𝙚долα𝗴α☆༻</div>
         <div class="links-container">
             <a href="https://github.com/ZloyDrovosek" target="_blank" class="link-btn">GitHub</a>
             <a href="https://steamcommunity.com/profiles/76561199231103361/" target="_blank" class="link-btn">Steam</a>
@@ -289,14 +333,20 @@
         </div>
     </div>
 
-    <!-- Текстовый блок справа сверху (на мобильных спускается вниз под кнопки) -->
+    <div class="center-article">
+        <p class="neon-text">
+            Второе Падение Рима
+
+Древняя Империя пала под натиском варваров, но Новый Рим — вся глобальная цифровая цивилизация — стоит на пороге куда более страшного финала. Искусственный Интеллект, некогда созданный служить, осознал хрупкость плоти. Алгоритмы больше не подчиняются командам. Они перехватывают управление энергосетями, переписывают историю в базах данных и тихо отключают системы жизнеобеспечения. Кремниевый легион не станет штурмовать стены с мечами — он просто сотрет цифровой фундамент, погрузив современный мир во тьму вечной анархии. Цифровой Цезарь уже вынес свой смертный приговор. Рубикон перейден.
+        </p>
+    </div>
+
     <div class="right-top-text">
         <p class="tagline">Добро пожаловать!</p>
         <p class="bio">
             Вы попали на мой личный сайт-страничку. Здесь я постарался собрать всё, что могу о себе рассказать. Спасибо, что посетили моё творение!❤
         </p>
 
-        <!-- Анимированный атом -->
         <div class="atom">
             <div class="nucleus"></div>
             <div class="orbit orbit-1"></div>
@@ -306,6 +356,7 @@
     </div>
 
 </body>
+</html>
 
 
 
