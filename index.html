@@ -16,11 +16,11 @@
             --avatar-border: #fcfcfc;      /* Цвет рамки вокруг аватарки */
             --avatar-glow: rgba(255, 255, 255, 0.5); /* Неоновое свечение аватарки */
 
-            /* 3. Плашки (кнопки) соцсетей в обычном состоянии */
+            /* 3. Плашки соцсетей в обычном состоянии */
             --btn-bg: rgba(109, 67, 224, 0.07); /* Полупрозрачный фон кнопок */
             --btn-border: rgba(255, 255, 255, 0.3); /* Цвет границ кнопок */
             
-            /* 4. Плашки (кнопки) при наведении курсора */
+            /* 4. Плашки при наведении курсора */
             --btn-hover-bg1: #fdfdfd;      /* Первая точка градиента при наведении */
             --btn-hover-bg2: #3e3e5a;      /* Вторая точка градиента при наведении */
             --btn-hover-border: #85a6b1;   /* Цвет рамки при наведении */
@@ -31,7 +31,7 @@
             --atom-orbit: rgba(255, 255, 255, 0.4); /* Цвет орбит атома */
             --atom-electron: #ffffff;      /* Цвет электронов на орбитах */
 
-            /* 6. Настройка цвета неоновой статьи (Тревожный Зловещий Красный) */
+            /* 6. Настройка цвета неоновой статьи */
             --neon-color: #ff003c;         
         }
 
@@ -44,7 +44,7 @@
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: #05020c;
-            background-image: url('EE1BD005-F3E3-4398-8A73-ABE070DDE42D.gif'); /* Ваш фон */
+            background-image: url('EE1BD005-F3E3-4398-8A73-ABE070DDE42D.gif'); /* фон */
             background-size: cover;
             background-position: center;
             background-attachment: fixed; /* Держит фон на одном месте при скролле */
@@ -85,7 +85,7 @@
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            background-image: url('imageava.png'); /* Ваша аватарка */
+            background-image: url('imageava.png'); /* аватарка */
             background-size: cover;
             background-position: center;
             background-color: #000;
@@ -284,7 +284,7 @@
                 0 0 20px var(--neon-color);
         }
 
-        /* ПОЛНОЕ ИСПРАВЛЕНИЕ ВИЗУАЛЬНЫХ БАГОВ НА МОБИЛКАХ */
+        /* ИСПРАВЛЕНИЕ ВИЗУАЛЬНЫХ БАГОВ НА МОБИЛКАХ */
         @media (max-width: 768px) {
             body {
                 flex-direction: column;
@@ -292,7 +292,6 @@
                 justify-content: flex-start;
                 overflow-y: auto;
                 padding: 30px 15px;
-                /* Фиксируем фон в мобильном браузере для устранения лагов */
                 background-attachment: fixed; 
                 background-size: cover;
             }
